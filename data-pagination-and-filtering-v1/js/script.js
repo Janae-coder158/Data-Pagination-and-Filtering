@@ -19,7 +19,8 @@ This function will create and insert/append the elements needed to display a "pa
 function showPage (list, page) {
     const startIndex = (page * 9) - 9;
     const endIndex = page * 9; 
-    const studentList = document.getElementsByClassName("student-list").innerHtML = "";
+    const studentList = document.querySelector('student-list')
+    studentList.innerHTML='';
     for (let i = 0; i < studentList.length; i++){
        if (i >= startIndex && i< endIndex) {
            studentList[i].style.display = 'block';
@@ -47,7 +48,8 @@ function showPage (list, page) {
  */
  function addPagination(list){
     const numOfPages = Math.ceil(42/9)
-    const linkList = document.getElementsByClassName('link-list').innerHtML = "";
+    const linkList = document.querySelector('link-list')
+    linkList.innerHTML='';
     for (let i=1; i<= numOfPages; i++) {
        let button = `<li> <button type = "button">${i}</button></li>`;
 
@@ -69,6 +71,6 @@ function showPage (list, page) {
  
  
  // Call functions
- showPage(data,1);
- addPagination(data);
+ showPage(1);
+ addPagination();
  
