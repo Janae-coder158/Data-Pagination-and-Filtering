@@ -19,12 +19,13 @@ This function will create and insert/append the elements needed to display a "pa
 function showPage (list, page) {
     const startIndex = (page * 9) - 9;
     const endIndex = page * 9; 
-    const studentList = document.querySelector('student-list')
-    studentList.innerHTML='';
-    for (let i = 0; i < studentList.length; i++){
-       if (i >= startIndex && i< endIndex) {
-           studentList[i].style.display = 'block';
-       const html= `<li class="student-item cf">
+    const studentList = document.querySelector('ul');
+    studentList.innerHTML= '';
+
+    for (let i = 0; i < list.length; i++) {
+       if (i >= startIndex && i < endIndex) {
+          
+       let html = `<li class="student-item cf">
            <div class="student-details">
              <img class="avatar" src="https://randomuser.me/api/portraits/women/25.jpg" alt="Profile Picture">
              <h3>Ethel Dean</h3>
@@ -33,11 +34,10 @@ function showPage (list, page) {
            <div class="joined-details">
              <span class="date">Joined 12-15-2005</span>
            </div>
-         </li>`;
+         </li>` 
+         studentList.insertAdjacentHTML("beforeend", studentList);
        }
-       else {
-          list[i].style.display = 'none';
-       }
+       
     }
     }
   
@@ -46,14 +46,14 @@ function showPage (list, page) {
  Create the `addPagination` function
  This function will create and insert/append the elements needed for the pagination buttons
  */
- function addPagination(list){
-    const numOfPages = Math.ceil(42/9)
-    const linkList = document.querySelector('link-list')
+ function addPagination(list) {
+    const numOfPages = Math.ceil(list.length / 9);
+    const linkList = document.querySelector('.link-list')
     linkList.innerHTML='';
-    for (let i=1; i<= numOfPages; i++) {
-       let button = `<li> <button type = "button">${i}</button></li>`;
+    for (let i=1; i < numOfPages; i++) {
+       let button = `<li> <button type = "button">${i}</button></li>`
 
-       linkList.insertAdjacentHTML('beforeend',button);
+       linkList.insertAdjacentHTML("beforeend",button);
     }
     let buttonFirst = document.querySelector('button');
        buttonFirst.className='active';
@@ -71,6 +71,6 @@ function showPage (list, page) {
  
  
  // Call functions
- showPage(1);
- addPagination();
+ showPage(data,1);
+ addPagination(data);
  
