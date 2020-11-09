@@ -35,7 +35,7 @@ function showPage (list, page) {
              <span class="date">Joined 12-15-2005</span>
            </div>
          </li>` 
-         studentList.insertAdjacentHTML("beforeend", studentList);
+         studentList.insertAdjacentHTML("beforeend", html);
        }
        
     }
@@ -47,10 +47,10 @@ function showPage (list, page) {
  This function will create and insert/append the elements needed for the pagination buttons
  */
  function addPagination(list) {
+   linkList.innerHTML='';
+   const linkList = document.querySelector('.link-list')
     const numOfPages = Math.ceil(list.length / 9);
-    const linkList = document.querySelector('.link-list')
-    linkList.innerHTML='';
-    for (let i=1; i < numOfPages; i++) {
+    for (let i=1; i <= numOfPages; i++) {
        let button = `<li> <button type = "button">${i}</button></li>`
 
        linkList.insertAdjacentHTML("beforeend",button);
@@ -71,6 +71,6 @@ function showPage (list, page) {
  
  
  // Call functions
- showPage(data,1);
+ showPage(data, 1);
  addPagination(data);
  
