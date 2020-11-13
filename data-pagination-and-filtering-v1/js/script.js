@@ -18,24 +18,25 @@ This function will create and insert/append the elements needed to display a "pa
 */
 function showPage (list, page) {
     const startIndex = (page * 9) - 9;
-    const endIndex = page * 9; 
-    const studentList = document.querySelector('ul');
-    studentList.innerHTML= '';
-
+    const endIndex = (page * 9); 
+    const studentList = document.querySelector('.student-list');
+    studentList.innerHTML = '';
     for (let i = 0; i < list.length; i++) {
        if (i >= startIndex && i < endIndex) {
           
-       let html = `<li class="student-item cf">
+       studentList.innerHTML += `
+       <li class="student-item cf">
            <div class="student-details">
-             <img class="avatar" src="https://randomuser.me/api/portraits/women/25.jpg" alt="Profile Picture">
-             <h3>Ethel Dean</h3>
-             <span class="email">ethel.dean@example.com</span>
-           </div>
-           <div class="joined-details">
-             <span class="date">Joined 12-15-2005</span>
-           </div>
-         </li>` 
-         studentList.insertAdjacentHTML("beforeend", html);
+           <img class="avatar" src=${list[i].picture.large} alt="Profile Picture">
+           <h3>${list[i].name.title} ${list[i].name.first} ${list[i].name.last}</h3>
+           <span class="email">${list[i].email}</span>
+         </div>
+         <div class="joined-details">
+           <span class="date">Joined ${list[i].registered.date}</span>
+         </div>
+       </li>  
+         `;
+         studentList.insertAdjacentHTML("beforeend", studentList);
        }
        
     }
@@ -46,12 +47,15 @@ function showPage (list, page) {
  Create the `addPagination` function
  This function will create and insert/append the elements needed for the pagination buttons
  */
+
  function addPagination(list) {
-   linkList.innerHTML='';
-   const linkList = document.querySelector('.link-list')
-    const numOfPages = Math.ceil(list.length / 9);
-    for (let i=1; i <= numOfPages; i++) {
-       let button = `<li> <button type = "button">${i}</button></li>`
+   const numOfPages = Math.ceil(list.length / 9);
+   let linkList = document.querySelector('.link-list');
+   linkList.innerHTML= '';
+    for (let i=1; i < numOfPages.valueOf(); i++) {
+       linkList.innerHTML = `
+       <li>  <button type:"button">${i + 1}</button>
+       </li>`;
 
        linkList.insertAdjacentHTML("beforeend",button);
     }
@@ -59,6 +63,9 @@ function showPage (list, page) {
        buttonFirst.className='active';
  
      linkList.addEventListener ('click', (e) => {
+      for (let i = 0; i < buttons.length; i++){
+         buttons[i].classList.remove('active');
+      }
        let selected = e.target;
           if (selected.tagName === 'BUTTON') {
           let active = document.querySelector('.active');
@@ -71,6 +78,7 @@ function showPage (list, page) {
  
  
  // Call functions
- showPage(data, 1);
+ showPage(data,1);
  addPagination(data);
+ 
  
